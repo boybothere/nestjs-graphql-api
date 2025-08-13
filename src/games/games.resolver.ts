@@ -3,10 +3,13 @@ import { GamesService } from './games.service';
 import { Query } from '@nestjs/graphql';
 import { Game } from './types/game.type';
 import { Achievement } from 'src/achievements/types/achievement.type';
+import { AchievementsService } from 'src/achievements/achievements.service';
 
 @Resolver(() => Game)
 export class GamesResolver {
-  constructor(private readonly gamesService: GamesService) { }
+  constructor(private readonly gamesService: GamesService,
+    private readonly achievementsService: AchievementsService
+  ) { }
 
   @Query(() => [Game], { name: 'games' })
   getGames() {
@@ -15,6 +18,6 @@ export class GamesResolver {
 
   @ResolveField(() => [Achievement])
   achievement(@Parent() game: Game) {
-    return this.gamesService.getAchievementsByGameId(game.id);
+    return this.achievementsService.getAchievementsByGameId(game.id);
   }
 }

@@ -8,9 +8,4 @@ export class GamesService {
         return await this.prisma.game.findMany()
     }
 
-    async getAchievementsByGameId(gameId: number) {
-        return await this.prisma.achievement.findMany({
-            where: { gameId }
-        })
-    }
 }
