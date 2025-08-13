@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { AchievementArgs } from 'src/achievements/args/achievements.args';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateGameInput } from './inputs/create-game.input';
+import { UserInputError } from '@nestjs/apollo';
 
 @Injectable()
 export class GamesService {
@@ -13,9 +14,20 @@ export class GamesService {
     }
 
     async getGameById(gameId: number) {
-        return await this.prisma.game.findUnique({
+        const game = await this.prisma.game.findUnique({
             where: {
                 id: gameId
+            }
+        })
+        if (!game) throw new UserInputError("Game not found!")
+        return game
+    }
+
+    async createGame(input: CreateGameInput) {
+        return await this.prisma.game.create({
+            data: {
+                name: input.name,
+                genre: input.genre
             }
         })
     }

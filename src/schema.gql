@@ -27,3 +27,21 @@ type Query {
   games(take: Int!, skip: Int!): [Game!]!
   game(id: Int!): Game!
 }
+
+type Mutation {
+  createGame(input: CreateGameInput!): Game!
+  createAchievement(input: CreateAchievementInput!): Achievement!
+}
+
+input CreateGameInput {
+  name: String!
+  genre: String!
+}
+
+input CreateAchievementInput {
+  title: String!
+  description: String!
+  points: Int!
+  difficulty: Difficulty!
+  gameId: Int!
+}
