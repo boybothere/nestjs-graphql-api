@@ -1,10 +1,10 @@
-import { Field, Int, ObjectType } from "@nestjs/graphql";
+import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
 import { Difficulty } from "../enums/difficulty.enum";
 
 @ObjectType()
 export class Achievement {
-    @Field()
-    id: string
+    @Field(() => ID)
+    id: number
 
     @Field()
     title: string

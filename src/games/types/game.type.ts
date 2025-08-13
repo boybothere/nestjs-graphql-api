@@ -1,10 +1,10 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { Achievement } from "src/achievements/types/achievement.type";
 
 @ObjectType()
 export class Game {
-    @Field()
-    id: string
+    @Field(() => ID)
+    id: number
 
     @Field()
     name: string

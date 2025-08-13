@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Achievement {
-  id: String!
+  id: ID!
   title: String!
   description: String!
   points: Int!
@@ -17,7 +17,7 @@ enum Difficulty {
 }
 
 type Game {
-  id: String!
+  id: ID!
   name: String!
   genre: String
   achievement: [Achievement!]!
